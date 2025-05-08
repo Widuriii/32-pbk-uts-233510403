@@ -1,30 +1,33 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+
+const tasks = ref([
+  { id: 1, text: 'UTS PBK', done: false },
+  { id: 2, text: 'Belajar Mandiri PBK', done: false }
+])
+
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <header class="app-header">
+    <h1 class="header">WeToDoList.com</h1>
+  </header>
+
+<div class="app">
+<h1>What To Do List : </h1>
+  <ul class="task-list">
+    <li v-for="task in tasks" :key="task.id" class="task">
+      <span>{{ task.text }}</span>
+    </li>
+  </ul>
+</div>
+
+  <footer>
+    <p>Widuri-233510403</p>
+    <p>Pemrograman Berbasis Komponen</p>
+  </footer>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
 </style>
