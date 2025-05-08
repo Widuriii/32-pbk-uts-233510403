@@ -6,6 +6,17 @@ const tasks = ref([
   { id: 2, text: 'Belajar Mandiri PBK', done: false }
 ])
 
+const newTask = ref('')
+const addTask = () => {
+  if (!newTask.value.trim()) 
+    return 
+  tasks.value.push({
+    id: Date.now(), 
+    text: newTask.value, 
+    done: false
+  })
+  newTask.value = ''
+}
 
 </script>
 
@@ -16,6 +27,12 @@ const tasks = ref([
 
 <div class="app">
 <h1>What To Do List : </h1>
+
+  <form @submit.prevent="addTask" class="form">
+    <input v-model="newTask" placeholder="Tambah kegiatan baru"/>
+    <button type="submit">Add</button>
+  </form>
+
   <ul class="task-list">
     <li v-for="task in tasks" :key="task.id" class="task">
       <span>{{ task.text }}</span>
