@@ -18,6 +18,10 @@ const addTask = () => {
   newTask.value = ''
 }
 
+const deleteTask = (id) => {
+  tasks.value = tasks.value.filter(t => t.id !== id)
+}
+
 </script>
 
 <template>
@@ -36,6 +40,7 @@ const addTask = () => {
   <ul class="task-list">
     <li v-for="task in tasks" :key="task.id" class="task">
       <span>{{ task.text }}</span>
+      <button @click="deleteTask(task.id)">cancel/delete</button>
     </li>
   </ul>
 </div>
