@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const tasks = ref([
   { id: 1, text: 'UTS PBK', done: false },
@@ -22,6 +22,9 @@ const deleteTask = (id) => {
   tasks.value = tasks.value.filter(t => t.id !== id)
 }
 
+const showOnlyPending = ref(false)
+const filteredTask = computed(() => showOnlyPending.value ? tasks.value.filter(t => !t.done) : tasks.value)
+
 </script>
 
 <template>
@@ -37,8 +40,12 @@ const deleteTask = (id) => {
     <button type="submit">Add</button>
   </form>
 
+  <label class="filter">
+    <input type="checkbox" v-model="showOnlyPending" />Tampilkan hanya yang belum selesai
+  </label>
+
   <ul class="task-list">
-    <li v-for="task in tasks" :key="task.id" class="task">
+    <li v-for="task in filteredTask" :key="task.id" class="task">
       <input type="checkbox" v-model="task.done" />
       <span :class="{done: task.done}">{{ task.text }}</span>
       <button @click="deleteTask(task.id)">cancel/delete</button>
