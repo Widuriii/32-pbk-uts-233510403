@@ -39,6 +39,7 @@ const deleteTask = (id) => {
 
   <ul class="task-list">
     <li v-for="task in tasks" :key="task.id" class="task">
+      <input type="checkbox" v-model="task.done" />
       <span>{{ task.text }}</span>
       <button @click="deleteTask(task.id)">cancel/delete</button>
     </li>
